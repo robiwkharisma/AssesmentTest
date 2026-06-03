@@ -12,3 +12,6 @@ curl --location 'http://127.0.0.1:8000/order' \
 }'
 
 ## Jangan lupa untuk set data dummy productnya
+
+## Untuk run test nya bisa pakai ini
+php artisan test tests/Feature/OrderServiceTest.php
