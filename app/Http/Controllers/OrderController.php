@@ -15,6 +15,9 @@ class OrderController extends Controller
         $this->orderServiceInterface = $orderServiceInterface;
 	}
 
+	/**
+	 * Store a new order.
+	 */
     public function store(Request $request)
     {
         $request->validate([

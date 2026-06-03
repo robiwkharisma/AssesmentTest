@@ -25,6 +25,19 @@ class OrderService implements OrderServiceInterface
         $this->productRepository = $productRepository;
     }
 
+    /**
+     * store processes an order by validating product availability, updating stock, and creating order records.
+     * 
+     * Steps:
+     * 1. Validates that the product exists and has sufficient stock for the requested quantity.
+     * 2. Decreases the product stock atomically to prevent race conditions during Flash Sale.
+     * 3. Creates a new Order record with the total price calculated from the product price and quantity.
+     * 4. Creates an OrderItem record associated with the Order for the purchased product.
+     * 5. Returns the created Order instance.
+     * 
+     * Error Handling:
+     * - Throws an exception if the product is not found or if the stock is insufficient, with appropriate error messages and HTTP status codes.
+     */
     public function store(array $data)
     {
         $product = $this->productRepository->find($data['product_id']);
